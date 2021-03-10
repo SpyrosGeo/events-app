@@ -1,9 +1,12 @@
 // import Head from 'next/head'
-
+import EventList from "../components/events/event-list"
+import { getAllEvents,  } from "../dummy-data"
 export default function Home() {
+  const featuredEvents = getAllEvents()
   return (
     <div>
-      <h1>The Home Page</h1>
+     <EventList items={featuredEvents} />
     </div>
+
   )
 }
