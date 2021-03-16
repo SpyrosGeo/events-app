@@ -1,8 +1,8 @@
 // import Head from 'next/head'
 import EventList from "../components/events/event-list"
-import { getAllEvents,  } from "../dummy-data"
+import {  getFeaturedEvents,  } from "../dummy-data"
 export default function Home() {
-  const featuredEvents = getAllEvents()
+  const featuredEvents = getFeaturedEvents()
   return (
     <div>
      <EventList items={featuredEvents} />
