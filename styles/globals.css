@@ -17,3 +17,7 @@ h5,
 h6 {
   font-family: 'Lato', sans-serif;
 }
+.center {
+  font-size: 3rem;
+  text-align: center;
+}
