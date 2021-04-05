@@ -1,7 +1,7 @@
 // import Head from 'next/head'
 import EventList from "../components/events/event-list"
 // import {  getFeaturedEvents,  } from "../dummy-data"
-import { getAllEvents } from "../helpers/api-util"
+import {getFeaturedEvents } from "../helpers/api-util"
 export default function Home({featuredEvents}) {
   // console.log(featuredEvents)
   return (
@@ -14,7 +14,7 @@ export default function Home({featuredEvents}) {
 
 export async function getStaticProps(){
 
-  const featuredEvents = await getAllEvents()
+  const featuredEvents = await getFeaturedEvents()
   console.log(featuredEvents)
   return {
     props:{
