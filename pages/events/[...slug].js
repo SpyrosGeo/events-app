@@ -8,15 +8,15 @@ import { getFilteredEvents } from '../../helpers/api-util';
 
 
 export default function FilteredEventsPage(props) {
-    // const router = useRouter()
-    // const filteredData = router.query.slug;
-    // if (!filteredData) {
-    //     return <p className="center">Loading...</p>
-    // }
-    // const filteredYear = filteredData[0]
-    // const filteredMonth = filteredData[1]
-    // const numYear = +filteredYear
-    // const numMonth = +filteredMonth
+    const router = useRouter()
+    const filteredData = router.query.slug;
+    if (!filteredData) {
+        return <p className="center">Loading...</p>
+    }
+    const filteredYear = filteredData[0]
+    const filteredMonth = filteredData[1]
+    const numYear = +filteredYear
+    const numMonth = +filteredMonth
     //check for valid parameteres
     const {filteredEvents,hasError,year,month} = props;
     if (hasError) {
