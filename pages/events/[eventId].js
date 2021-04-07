@@ -1,6 +1,6 @@
 import { useRouter} from 'next/router'
 import { Fragment } from 'react'
-import {getEventById,getAllEvents} from '../../helpers/api-util'
+import {getEventById,getFeaturedEvents} from '../../helpers/api-util'
 
 import EventSummary from '../../components/event-detail/event-summary'
 import EventContent from '../../components/event-detail/event-content'
@@ -13,9 +13,9 @@ export default function EventDetailPage({event}) {
 
     // const event = getEventById(eventId)
     if (!event) {
-        return <ErrorAlert>
-            <p>No Event Found</p>
-        </ErrorAlert>
+        return <div className="center">
+            <p>Loading..</p>
+        </div>
     }
     
     const { title,id,description,location,date, image} = event
@@ -38,15 +38,16 @@ export async function getStaticProps(context){
     return {
         props:{
             event
-        }
+        },
+        revalidate:30 //in seconds always
     }
 }
 export async function getStaticPaths(){
-    const events = await getAllEvents()
+    const events = await getFeaturedEvents()
     const paths = events.map(event=>({params:{eventId:event.id}}))
     return {
         paths,
-        fallback:false //false shows the 404 page
+        fallback:'blocking' //false shows the 404 page //blocking waits for the page to load and does not show anything
     }
 }
 
