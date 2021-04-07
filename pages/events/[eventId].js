@@ -1,17 +1,17 @@
 import { useRouter} from 'next/router'
 import { Fragment } from 'react'
-import {getEventById} from '../../dummy-data'
+import {getEventById,getAllEvents} from '../../helpers/api-util'
 
 import EventSummary from '../../components/event-detail/event-summary'
 import EventContent from '../../components/event-detail/event-content'
 import EventLogistics from '../../components/event-detail/event-logistics'
 import ErrorAlert from '../../components/ui/error-alert'
 
-export default function EventDetailPage() {
-    const router = useRouter()
-    const eventId = router.query.eventId
+export default function EventDetailPage({event}) {
+    // const router = useRouter()
+    // const eventId = router.query.eventId
 
-    const event = getEventById(eventId)
+    // const event = getEventById(eventId)
     if (!event) {
         return <ErrorAlert>
             <p>No Event Found</p>
@@ -30,3 +30,23 @@ export default function EventDetailPage() {
     </Fragment>
     )
 }
+//dont forget for dynamic pages we need getStaticPaths
+export async function getStaticProps(context){
+    const eventId = context.params.eventId
+    const event = await getEventById(eventId)
+
+    return {
+        props:{
+            event
+        }
+    }
+}
+export async function getStaticPaths(){
+    const events = await getAllEvents()
+    const paths = events.map(event=>({params:{eventId:event.id}}))
+    return {
+        paths,
+        fallback:false //false shows the 404 page
+    }
+}
+
