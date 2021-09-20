@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import EventList from "../../components/events/event-list"
 import EventsSearch from "../../components/events/events-search"
 import { getAllEvents  } from "../../helpers/api-util"
@@ -11,6 +12,10 @@ export default function AllEventsPage({events}) {
 
     return (
         <div>
+            <Head>
+                <title>Events</title>
+                <meta name="description" content="Find a lot of great events..."/>
+            </Head>
             <EventsSearch onSearch={handleFindEvents} />
             <EventList items={events} />
         </div>
